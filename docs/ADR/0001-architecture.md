@@ -25,6 +25,11 @@ Date: 2026-01-20
 6. **Execution model**
    - Serial topological execution (no parallelism in MVP).
 
+Related specs:
+- System Design SDD: `docs/SYSTEM_DESIGN_SDD.md`
+- Spec Index: `docs/SPEC_INDEX.md`
+- Vibe Coding Guide: `docs/VIBE_CODING_GUIDE.md`
+
 ## Consequences
 - **Pros:** Simple local setup, strong schema validation, clear separation of concerns.
 - **Cons:** Limited scalability; no parallel execution; minimal UI scope.

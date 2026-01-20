@@ -4,6 +4,17 @@ Version: 0.1
 Status: Draft  
 Last Updated: 2026-01-20
 
+## 0. Reading Map (Spec Anchors)
+
+This document defines the **normative** DSL/Execution semantics and node specs for the Workflow MVP.
+
+Related specs:
+- System-level module design: `docs/SYSTEM_DESIGN_SDD.md`
+- API contract: `docs/API.md`
+- Acceptance tests: `docs/ACCEPTANCE_TESTS.md`
+- Spec index (single source of truth map): `docs/SPEC_INDEX.md`
+- Vibe Coding protocol: `docs/VIBE_CODING_GUIDE.md`
+
 ## 1. Scope and Goals
 
 ### Goals
