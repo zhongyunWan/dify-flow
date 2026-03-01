@@ -16,52 +16,52 @@ const CustomNode = memo(({ data, selected }: CustomNodeProps) => {
   return (
     <div
       className={`
-        group min-w-[200px] rounded-xl border-2 transition-all duration-300
+        group min-w-[180px] rounded-lg border transition-all duration-200
         ${selected
-          ? 'shadow-2xl scale-105'
-          : 'shadow-lg hover:shadow-xl hover:scale-[1.02]'
+          ? 'shadow-lg'
+          : 'hover:shadow-md'
         }
       `}
       style={{
-        background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)',
-        borderColor: selected ? color : `${color}40`,
+        background: 'var(--bg-primary)',
+        borderColor: selected ? color : 'var(--border-default)',
         boxShadow: selected
-          ? `0 0 30px ${color}40, 0 8px 32px rgba(0, 0, 0, 0.4)`
-          : `0 4px 20px rgba(0, 0, 0, 0.3)`,
+          ? `0 0 0 2px ${color}30, var(--shadow-md)`
+          : 'var(--shadow-sm)',
       }}
     >
       <Handle
         type="target"
         position={Position.Top}
-        className="!w-3 !h-3 !bg-slate-600 !border-2 !border-slate-400 !-top-1.5 transition-all duration-200"
+        className="!w-2.5 !h-2.5 !-top-1.5"
         style={{
           background: 'var(--bg-tertiary)',
-          borderColor: 'var(--text-secondary)',
+          border: '2px solid var(--text-tertiary)',
         }}
       />
 
-      <div className="p-4">
-        <div className="flex items-center gap-3">
+      <div className="p-3">
+        <div className="flex items-center gap-2.5">
           {/* Icon Container */}
           <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center text-xl transition-all duration-300 group-hover:scale-110"
+            className="w-8 h-8 rounded-md flex items-center justify-center text-base"
             style={{
-              background: `linear-gradient(135deg, ${color}25, ${color}10)`,
-              boxShadow: `0 0 20px ${color}30, inset 0 0 10px ${color}10`,
+              background: `linear-gradient(135deg, ${color}12, ${color}06)`,
+              border: `1px solid ${color}20`,
             }}
           >
-            <span style={{ filter: `drop-shadow(0 0 6px ${color}80)` }}>{icon}</span>
+            <span>{icon}</span>
           </div>
 
           {/* Labels */}
           <div className="flex flex-col">
             <div
-              className="text-sm font-semibold tracking-wide"
+              className="text-sm font-medium"
               style={{ color }}
             >
               {label}
             </div>
-            <div className="text-xs text-slate-500 truncate max-w-[120px]">
+            <div className="text-xs truncate max-w-[100px]" style={{ color: 'var(--text-tertiary)' }}>
               {data.label}
             </div>
           </div>
@@ -69,16 +69,13 @@ const CustomNode = memo(({ data, selected }: CustomNodeProps) => {
 
         {/* Status Indicator */}
         {selected && (
-          <div className="mt-3 pt-3 border-t border-slate-700/50">
-            <div className="flex items-center gap-2">
+          <div className="mt-2 pt-2 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+            <div className="flex items-center gap-1.5">
               <div
-                className="w-2 h-2 rounded-full animate-pulse"
-                style={{
-                  backgroundColor: color,
-                  boxShadow: `0 0 8px ${color}`,
-                }}
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ backgroundColor: color }}
               />
-              <span className="text-xs text-slate-500">
+              <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
                 已选中
               </span>
             </div>
@@ -89,10 +86,10 @@ const CustomNode = memo(({ data, selected }: CustomNodeProps) => {
       <Handle
         type="source"
         position={Position.Bottom}
-        className="!w-3 !h-3 !bg-slate-600 !border-2 !border-slate-400 !-bottom-1.5 transition-all duration-200"
+        className="!w-2.5 !h-2.5 !-bottom-1.5"
         style={{
           background: 'var(--bg-tertiary)',
-          borderColor: 'var(--text-secondary)',
+          border: '2px solid var(--text-tertiary)',
         }}
       />
     </div>

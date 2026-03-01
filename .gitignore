@@ -40,11 +40,16 @@ htmlcov/
 *~
 .DS_Store
 
+# Node (root - for testing)
+node_modules/
+package-lock.json
+package.json
+test-results/
+
 # Node (frontend)
 web/node_modules/
 web/dist/
 web/dist-ssr/
-*.local
 
 # Environment
 .env
@@ -59,6 +64,4 @@ logs/
 # .claude/
 
 # Test files
-test-*
-test-results/
 *.screenshot.png

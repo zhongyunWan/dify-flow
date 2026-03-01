@@ -122,44 +122,49 @@ export default function Toolbar() {
 
   const getStatusColor = () => {
     switch (useWorkflowStore.getState().executionStatus) {
-      case 'completed': return 'bg-emerald-500';
-      case 'failed': return 'bg-red-500';
-      case 'running': return 'bg-blue-500 animate-pulse';
-      default: return 'bg-slate-500';
+      case 'completed': return 'bg-[#17b26a]';
+      case 'failed': return 'bg-[#f04438]';
+      case 'running': return 'bg-[#2e90fa] animate-pulse';
+      default: return 'bg-[#98a2b3]';
     }
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-16 z-40 flex items-center justify-between px-6 glass">
+    <div className="fixed top-0 left-0 right-0 h-16 z-40 flex items-center justify-between px-6 glass" style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-default)' }}>
       {/* Left: Logo & Name */}
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700))', boxShadow: '0 2px 8px rgba(21, 94, 239, 0.3)' }}>
             <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <span className="font-semibold text-lg tracking-tight text-slate-100">
-            Dify <span className="text-indigo-400">Flow</span>
+          <span className="font-semibold text-lg tracking-tight" style={{ color: 'var(--text-primary)' }}>
+            Dify <span style={{ color: 'var(--color-primary-600)' }}>Flow</span>
           </span>
         </div>
 
-        <div className="h-6 w-px bg-slate-700/50" />
+        <div className="h-6 w-px" style={{ background: 'var(--border-strong)' }} />
 
         <input
           type="text"
           value={workflowName}
           onChange={(e) => setWorkflowName(e.target.value)}
           placeholder="未命名工作流"
-          className="w-48 px-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700/50 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+          className="w-48 px-4 py-2 rounded-lg text-sm transition-all"
+          style={{
+            background: 'var(--color-components-input-bg-normal)',
+            border: '1px solid var(--border-default)',
+            color: 'var(--text-primary)',
+          }}
         />
       </div>
 
       {/* Center: Status */}
       {isExecuting && (
-        <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 animate-fade-in">
-          <div className={`w-2 h-2 rounded-full ${getStatusColor()} shadow-lg shadow-current`} />
-          <span className="text-sm text-slate-400 font-medium">
+        <div className="flex items-center gap-3 px-4 py-2 rounded-full animate-fade-in" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-default)' }}>
+          <div className={`w-2 h-2 rounded-full ${getStatusColor()} shadow-lg`} />
+          <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
             {useWorkflowStore.getState().executionStatus === 'running' ? '执行中...' :
              useWorkflowStore.getState().executionStatus === 'completed' ? '执行完成' :
              '等待执行'}
@@ -172,7 +177,8 @@ export default function Toolbar() {
         {/* Theme Toggle */}
         <button
           onClick={toggleDarkMode}
-          className="w-10 h-10 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all"
+          className="w-10 h-10 rounded-lg flex items-center justify-center transition-all"
+          style={{ color: 'var(--text-tertiary)' }}
           title={isDarkMode ? '切换到浅色模式' : '切换到深色模式'}
         >
           {isDarkMode ? (
@@ -189,7 +195,8 @@ export default function Toolbar() {
         {/* Import */}
         <button
           onClick={handleImport}
-          className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all"
+          className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+          style={{ background: 'var(--color-components-button-tertiary-bg)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}
         >
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -202,7 +209,8 @@ export default function Toolbar() {
         {/* Export */}
         <button
           onClick={handleExport}
-          className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all"
+          className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+          style={{ background: 'var(--color-components-button-tertiary-bg)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}
         >
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -215,7 +223,8 @@ export default function Toolbar() {
         {/* Save */}
         <button
           onClick={() => setShowSaveModal(true)}
-          className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all"
+          className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+          style={{ background: 'var(--color-components-button-tertiary-bg)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}
         >
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -229,13 +238,13 @@ export default function Toolbar() {
         <button
           onClick={handleRun}
           disabled={isExecuting}
-          className={`
-            px-5 py-2 rounded-xl text-sm font-semibold transition-all
-            ${isExecuting
-              ? 'opacity-50 cursor-not-allowed bg-emerald-600/50'
-              : 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-400 hover:to-emerald-500 hover:shadow-lg hover:shadow-emerald-500/25 hover:-translate-y-0.5'
-            }
-          `}
+          className="px-5 py-2 rounded-lg text-sm font-semibold transition-all"
+          style={{
+            background: isExecuting ? 'var(--color-gray-400)' : 'var(--color-components-button-primary-bg)',
+            color: 'white',
+            cursor: isExecuting ? 'not-allowed' : 'pointer',
+            opacity: isExecuting ? 0.5 : 1,
+          }}
         >
           <span className="flex items-center gap-2">
             {isExecuting ? (
@@ -260,9 +269,9 @@ export default function Toolbar() {
 
       {/* Save Modal */}
       {showSaveModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="w-[400px] p-6 rounded-2xl glass shadow-2xl animate-scale-in">
-            <h3 className="text-xl font-semibold mb-5 text-slate-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0, 0, 0, 0.4)' }} >
+          <div className="w-[400px] p-6 rounded-xl animate-scale-in" style={{ background: 'var(--bg-primary)', boxShadow: 'var(--shadow-xl)' }}>
+            <h3 className="text-xl font-semibold mb-5" style={{ color: 'var(--text-primary)' }}>
               保存工作流
             </h3>
             <input
@@ -270,19 +279,29 @@ export default function Toolbar() {
               value={saveName}
               onChange={(e) => setSaveName(e.target.value)}
               placeholder="请输入工作流名称"
-              className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all mb-5"
+              className="w-full px-4 py-3 rounded-lg text-sm transition-all mb-5"
+              style={{
+                background: 'var(--color-components-input-bg-normal)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-primary)',
+              }}
               autoFocus
             />
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowSaveModal(false)}
-                className="px-5 py-2.5 rounded-xl text-sm font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all"
+                className="px-5 py-2.5 rounded-lg text-sm font-medium transition-all"
+                style={{ background: 'var(--color-components-button-tertiary-bg)', border: '1px solid var(--border-default)', color: 'var(--text-secondary)' }}
               >
                 取消
               </button>
               <button
                 onClick={handleSave}
-                className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-400 hover:to-purple-400 hover:shadow-lg hover:shadow-indigo-500/25 transition-all"
+                className="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all"
+                style={{
+                  background: 'var(--color-components-button-primary-bg)',
+                  color: 'white',
+                }}
               >
                 保存
               </button>

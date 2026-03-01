@@ -1,40 +1,117 @@
-/* Dify Flow - Premium Dark Theme Design System */
+/* Dify Flow - Design System based on Dify */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   /* ============================================
-     BASE COLORS - Light Theme (Default)
+     DIFY COLOR SYSTEM - Light Theme (Default)
      ============================================ */
-  --bg-deep: #f8fafc;
-  --bg-primary: #ffffff;
-  --bg-secondary: #f1f5f9;
-  --bg-tertiary: #e2e8f0;
-  --bg-elevated: #ffffff;
 
+  /* Primary Colors - Blue */
+  --color-primary-25: #f5f8ff;
+  --color-primary-50: #eff4ff;
+  --color-primary-100: #d1e0ff;
+  --color-primary-200: #b2ccff;
+  --color-primary-300: #84adff;
+  --color-primary-400: #528bff;
+  --color-primary-500: #2970ff;
+  --color-primary-600: #155eef;
+  --color-primary-700: #004eeb;
+  --color-primary-800: #0040c1;
+  --color-primary-900: #00359e;
+
+  /* Background Colors */
+  --color-background-body: #f2f4f7;
+  --color-background-default: #ffffff;
+  --color-background-default-subtle: #fcfcfd;
+  --color-background-soft: #f9fafb;
+  --color-background-section: #f9fafb;
+
+  /* Text Colors */
+  --color-text-primary: #101828;
+  --color-text-secondary: #354052;
+  --color-text-tertiary: #676f83;
+  --color-text-quaternary: rgba(16, 24, 40, 0.3);
+  --color-text-placeholder: #98a2b2;
+  --color-text-disabled: #d0d5dc;
+
+  /* Component Colors */
+  --color-components-button-primary-bg: #155aef;
+  --color-components-button-primary-bg-hover: #004aeb;
+  --color-components-button-secondary-bg: #ffffff;
+  --color-components-button-secondary-border: rgba(16, 24, 40, 0.14);
+  --color-components-button-tertiary-bg: #f2f4f7;
+  --color-components-input-bg-normal: rgba(200, 206, 218, 0.25);
+  --color-components-input-bg-active: #f9fafb;
+  --color-components-input-border-active: #d0d5dc;
+  --color-components-input-border-hover: #d0d5dc;
+
+  /* Border Colors */
+  --color-divider-regular: rgba(16, 24, 40, 0.08);
+  --color-divider-solid: #d0d5dc;
+  --color-components-panel-border: rgba(16, 24, 40, 0.08);
+
+  /* Status Colors */
+  --color-text-success: #079455;
+  --color-text-warning: #dc6803;
+  --color-text-destructive: #d92d20;
+  --color-success-bg: #ecfdf3;
+  --color-warning-bg: #fffaeb;
+  --color-error-bg: #fef3f2;
+  --color-normal-bg: #f0f9ff;
+
+  /* Utility Colors */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f2f4f7;
+  --color-gray-200: #eaecf0;
+  --color-gray-300: #d0d5dd;
+  --color-gray-400: #98a2b3;
+  --color-gray-500: #667085;
+  --color-gray-600: #344054;
+  --color-gray-700: #475467;
+  --color-gray-800: #1d2939;
+  --color-gray-900: #101828;
+
+  /* ============================================
+     ALIASES (for easier use in components)
+     ============================================ */
+  --accent-primary: var(--color-primary-600);
+  --accent-secondary: var(--color-primary-500);
+  --accent-tertiary: var(--color-primary-400);
+
+  /* Background aliases */
+  --bg-deep: var(--color-background-body);
+  --bg-primary: var(--color-background-default);
+  --bg-secondary: var(--color-background-soft);
+  --bg-tertiary: var(--color-gray-100);
+  --bg-elevated: var(--color-background-default);
+
+  /* Surface */
   --surface-glass: rgba(255, 255, 255, 0.9);
   --surface-glass-light: rgba(0, 0, 0, 0.02);
-  --surface-glass-border: rgba(0, 0, 0, 0.08);
+  --surface-glass-border: rgba(16, 24, 40, 0.08);
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-tertiary: #64748b;
-  --text-muted: #94a3b8;
+  /* Text aliases */
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-tertiary: var(--color-text-tertiary);
+  --text-muted: var(--color-text-placeholder);
 
-  --border-subtle: rgba(0, 0, 0, 0.04);
-  --border-default: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.12);
+  /* Border aliases */
+  --border-subtle: var(--color-divider-regular);
+  --border-default: var(--color-components-panel-border);
+  --border-strong: var(--color-divider-solid);
 
-  --glow-primary: 0 0 20px rgba(99, 102, 241, 0.15);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
   /* ============================================
      TYPOGRAPHY
      ============================================ */
-  --font-display: 'Outfit', -apple-system, sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* ============================================
@@ -47,51 +124,71 @@
   --duration-slow: 400ms;
 
   /* ============================================
-     ACCENT COLORS - Vibrant & Electric
+     NODE TYPE COLORS (Dify-style)
      ============================================ */
-  --accent-primary: #6366f1;      /* Indigo */
-  --accent-secondary: #8b5cf6;    /* Purple */
-  --accent-tertiary: #ec4899;    /* Pink */
-  --accent-cyan: #06b6d4;         /* Cyan */
-
-  /* Node Type Colors */
-  --node-data: #10b981;          /* Emerald */
-  --node-train: #3b82f6;         /* Blue */
-  --node-compress: #8b5cf6;      /* Purple */
-  --node-inference: #f59e0b;     /* Amber */
-  --node-deploy: #ef4444;        /* Red */
-  --node-condition: #06b6d4;     /* Cyan */
+  --node-data: #17b26a;           /* Green */
+  --node-train: #2e90fa;           /* Blue */
+  --node-compress: #6172f3;       /* Indigo */
+  --node-inference: #f79009;      /* Orange */
+  --node-deploy: #f04438;         /* Red */
+  --node-condition: #7839ee;      /* Violet */
 }
 
 /* Dark theme override */
 .dark {
-  /* ============================================
-     BASE COLORS - Deep Space Theme
-     ============================================ */
-  --bg-deep: #0a0a0f;
-  --bg-primary: #12121a;
-  --bg-secondary: #1a1a24;
-  --bg-tertiary: #22222e;
-  --bg-elevated: #2a2a38;
+  /* Primary Colors - Dark */
+  --color-primary-25: #1e293b;
+  --color-primary-50: #1e3a5f;
+  --color-primary-100: #1e3a5f;
+  --color-primary-200: #1d4ed8;
+  --color-primary-300: #3b82f6;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #93c5fd;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #3b82f6;
+  --color-primary-800: #60a5fa;
+  --color-primary-900: #dbeafe;
 
-  --surface-glass: rgba(18, 18, 26, 0.85);
+  /* Background Colors - Dark */
+  --color-background-body: #1d1d20;
+  --color-background-default: #222225;
+  --color-background-default-subtle: #2a2a30;
+  --color-background-soft: #27272a;
+  --color-background-section: #27272a;
+
+  /* Text Colors - Dark */
+  --color-text-primary: #fbfbfc;
+  --color-text-secondary: #d9d9de;
+  --color-text-tertiary: rgba(200, 206, 218, 0.6);
+  --color-text-quaternary: rgba(200, 206, 218, 0.3);
+  --color-text-placeholder: #707888;
+  --color-text-disabled: #4a4a52;
+
+  /* Border Colors - Dark */
+  --color-divider-regular: rgba(255, 255, 255, 0.08);
+  --color-divider-solid: #3a3a42;
+  --color-components-panel-border: rgba(255, 255, 255, 0.08);
+
+  /* Surface - Dark */
+  --surface-glass: rgba(34, 34, 37, 0.85);
   --surface-glass-light: rgba(255, 255, 255, 0.03);
   --surface-glass-border: rgba(255, 255, 255, 0.08);
 
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-tertiary: #64748b;
-  --text-muted: #475569;
+  /* Aliases - Dark */
+  --bg-deep: var(--color-background-body);
+  --bg-primary: var(--color-background-default);
+  --bg-secondary: var(--color-background-soft);
+  --bg-tertiary: var(--color-background-section);
+  --bg-elevated: var(--color-background-default-subtle);
 
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-default: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.15);
+  --border-subtle: var(--color-divider-regular);
+  --border-default: var(--color-components-panel-border);
+  --border-strong: var(--color-divider-solid);
 
-  --glow-primary: 0 0 20px rgba(99, 102, 241, 0.3);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================
@@ -113,7 +210,7 @@ html, body {
 
 /* Selection */
 ::selection {
-  background: var(--accent-primary);
+  background: var(--color-primary-600);
   color: white;
 }
 
@@ -155,18 +252,18 @@ html, body {
 
 /* Controls */
 .react-flow__controls {
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border-default);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .react-flow__controls-button {
-  background: var(--bg-secondary) !important;
+  background: var(--bg-primary) !important;
   border: none !important;
   border-bottom: 1px solid var(--border-subtle) !important;
-  width: 32px !important;
-  height: 32px !important;
+  width: 28px !important;
+  height: 28px !important;
   transition: all var(--duration-fast) var(--ease-out-expo);
 }
 
@@ -175,7 +272,7 @@ html, body {
 }
 
 .react-flow__controls-button:hover {
-  background: var(--bg-tertiary) !important;
+  background: var(--bg-secondary) !important;
 }
 
 .react-flow__controls-button svg {
@@ -188,10 +285,10 @@ html, body {
 
 /* Minimap */
 .react-flow__minimap {
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border-default);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Background */
@@ -206,7 +303,7 @@ html, body {
 }
 
 .react-flow__edge.selected .react-flow__edge-path {
-  stroke: var(--accent-primary);
+  stroke: var(--color-primary-500);
 }
 
 /* ============================================
@@ -250,24 +347,6 @@ html, body {
   }
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px var(--accent-primary);
-  }
-  50% {
-    box-shadow: 0 0 20px var(--accent-primary), 0 0 30px var(--accent-secondary);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
 /* Utility Classes */
 .animate-fade-in {
   animation: fadeIn var(--duration-normal) var(--ease-out-expo);
@@ -288,14 +367,14 @@ html, body {
 /* Glass Effect */
 .glass {
   background: var(--surface-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--surface-glass-border);
 }
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-500), var(--color-primary-400));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -312,8 +391,8 @@ input, textarea, select {
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.1);
 }
 
 /* ============================================

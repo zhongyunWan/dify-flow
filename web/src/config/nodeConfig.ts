@@ -46,12 +46,12 @@ export const nodeLabels: Record<NodeType, string> = {
 };
 
 export const nodeColors: Record<NodeType, string> = {
-  data_node: '#10b981',
-  train_node: '#3b82f6',
-  compress_node: '#8b5cf6',
-  inference_node: '#f59e0b',
-  deploy_node: '#ef4444',
-  condition_node: '#06b6d4',
+  data_node: '#17b26a',    /* Dify Green */
+  train_node: '#2e90fa',   /* Dify Blue */
+  compress_node: '#6172f3', /* Dify Indigo */
+  inference_node: '#f79009', /* Dify Orange */
+  deploy_node: '#f04438',   /* Dify Red */
+  condition_node: '#7839ee', /* Dify Violet */
 };
 
 export const nodeIcons: Record<NodeType, string> = {
