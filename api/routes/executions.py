@@ -28,8 +28,11 @@ async def get_execution(execution_id: str):
     node_executions = [
         NodeExecutionItem(
             node_id=ne.get("node_id", ""),
+            node_type=ne.get("node_type"),
             status=ne.get("status", ""),
+            input=ne.get("input"),
             output=ne.get("output", {}),
+            error=ne.get("error"),
         )
         for ne in execution.node_executions
     ]

@@ -130,7 +130,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
   addNode: (type, position) => {
     const newNode: Node = {
       id: generateNodeId(type),
-      type: 'custom',
+      type: type,
       position,
       data: getDefaultNodeData(type),
     };
@@ -174,19 +174,22 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
     return {
       id: workflowId || `workflow_${Date.now()}`,
       name: workflowName,
-      nodes: nodes.map(n => ({
-        id: n.id,
-        type: n.type as NodeType,
-        position: n.position,
-        data: n.data as NodeData,
-      })),
-      edges: edges.map(e => ({
-        id: e.id,
-        source: e.source,
-        target: e.target,
-        sourceHandle: e.sourceHandle || undefined,
-        targetHandle: e.targetHandle || undefined,
-      })),
+      description: '',
+      graph: {
+        nodes: nodes.map(n => ({
+          id: n.id,
+          type: n.type as NodeType,
+          position: n.position,
+          data: n.data as NodeData,
+        })),
+        edges: edges.map(e => ({
+          id: e.id,
+          source: e.source,
+          target: e.target,
+          sourceHandle: e.sourceHandle || undefined,
+          targetHandle: e.targetHandle || undefined,
+        })),
+      },
     };
   },
 

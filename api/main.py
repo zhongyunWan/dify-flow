@@ -8,7 +8,7 @@ from routes import common, executions, nodes, workflows
 
 # 创建 FastAPI 应用
 app = FastAPI(
-    title="Dify Workflow API",
+    title="QS2 Workflow API",
     description="大模型工作流编排应用 API",
     version="1.0.0",
 )

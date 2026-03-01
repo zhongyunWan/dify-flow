@@ -94,14 +94,14 @@ export default function Toolbar() {
 
       const pollExecution = async () => {
         try {
-          const result = await executionApi.get(execution.id);
+          const result = await executionApi.get(execution.execution_id);
           if (result.status === 'completed') {
             setExecutionStatus('completed');
             setExecuting(false);
           } else if (result.status === 'failed') {
             setExecutionStatus('failed');
             setExecuting(false);
-            alert(`执行失败: ${result.error}`);
+            alert(`执行失败: ${result.outputs?.error || '未知错误'}`);
           } else {
             setTimeout(pollExecution, 2000);
           }
@@ -140,7 +140,7 @@ export default function Toolbar() {
             </svg>
           </div>
           <span className="font-semibold text-base tracking-tight" style={{ color: 'var(--text-primary)' }}>
-            Dify <span style={{ color: 'var(--color-primary-600)' }}>Flow</span>
+            QS2 <span style={{ color: 'var(--color-primary-600)' }}>Workflow</span>
           </span>
         </div>
 

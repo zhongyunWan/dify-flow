@@ -40,13 +40,13 @@ export interface WorkflowEdge {
 
 // API types
 export interface WorkflowExecution {
-  id: string;
+  execution_id: string;
   workflow_id: string;
   status: 'pending' | 'running' | 'completed' | 'failed';
-  start_time: string;
-  end_time?: string;
-  result?: any;
-  error?: string;
+  started_at: string;
+  finished_at?: string;
+  outputs?: any;
+  node_executions?: any[];
 }
 
 export interface ApiResponse<T> {

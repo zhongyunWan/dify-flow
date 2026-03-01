@@ -1,4 +1,4 @@
-/* Dify Flow - Design System based on Dify */
+/* QS2 Workflow - Design System */
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -124,7 +124,7 @@
   --duration-slow: 400ms;
 
   /* ============================================
-     NODE TYPE COLORS (Dify-style)
+     NODE TYPE COLORS
      ============================================ */
   --node-data: #17b26a;           /* Green */
   --node-train: #2e90fa;           /* Blue */

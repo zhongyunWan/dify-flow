@@ -6,7 +6,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(.*)",
       "Write(.*)",
-      "Git(.*)"
+      "Git(.*)",
+      "Curl(.*)"
     ],
     "defaultMode": "bypassPermissions"
   }

@@ -18,7 +18,7 @@ async def health_check():
 async def root():
     """API信息"""
     return APIInfoResponse(
-        name="Dify Workflow API",
+        name="QS2 Workflow API",
         version="1.0.0",
         description="大模型工作流编排应用 API",
     )

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Dify Workflow is a visual workflow orchestration application for large language model operations (training, compression, inference, deployment). It consists of two main components:
+QS2 Workflow is a visual workflow orchestration application for large language model operations (training, compression, inference, deployment). It consists of two main components:
 
 - **Backend**: Python FastAPI (`api/`)
 - **Frontend**: React + TypeScript + Vite (`web/`)

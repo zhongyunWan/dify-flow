@@ -227,3 +227,147 @@ class TestNodeRetry:
         )
 
         assert response.status_code == 404
+
+
+class TestUnderscoreConfig:
+    """下划线配置测试"""
+
+    def test_run_workflow_with_data_node_underscore_config(self, client):
+        """测试使用下划线配置的数据节点执行"""
+        workflow_data = {
+            "name": "数据节点测试",
+            "description": "测试下划线配置",
+            "graph": {
+                "nodes": [
+                    {
+                        "id": "data_node_1",
+                        "type": "data_node",
+                        "position": {"x": 100, "y": 100},
+                        "data": {
+                            "label": "数据节点",
+                            "config": {
+                                "data_source": "custom",
+                                "data": "test data content"
+                            }
+                        },
+                    }
+                ],
+                "edges": [],
+            },
+        }
+
+        # 创建工作流
+        response = client.post("/api/v1/workflows", json=workflow_data)
+        assert response.status_code == 201
+        workflow_id = response.json()["id"]
+
+        # 执行工作流
+        response = client.post(
+            f"/api/v1/workflows/{workflow_id}/run",
+            json={"inputs": {}},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["status"] == "completed"
+
+    def test_run_workflow_with_train_node_underscore_config(self, client):
+        """测试使用下划线配置的的训练节点执行"""
+        workflow_data = {
+            "name": "训练节点测试",
+            "description": "测试下划线配置",
+            "graph": {
+                "nodes": [
+                    {
+                        "id": "train_node_1",
+                        "type": "train_node",
+                        "position": {"x": 100, "y": 100},
+                        "data": {
+                            "label": "训练节点",
+                            "config": {
+                                "model_name": "custom-model",
+                                "epochs": 20,
+                                "batch_size": 64,
+                                "learning_rate": 0.0001,
+                                "gpu_count": 2
+                            }
+                        },
+                    }
+                ],
+                "edges": [],
+            },
+        }
+
+        # 创建工作流
+        response = client.post("/api/v1/workflows", json=workflow_data)
+        assert response.status_code == 201
+        workflow_id = response.json()["id"]
+
+        # 执行工作流
+        response = client.post(
+            f"/api/v1/workflows/{workflow_id}/run",
+            json={"inputs": {"dataset": "train.csv"}},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["status"] == "completed"
+
+    def test_run_workflow_with_chained_nodes(self, client):
+        """测试链接的多个节点执行（data -> train）"""
+        workflow_data = {
+            "name": "链接节点测试",
+            "description": "测试下划线配置的链接节点",
+            "graph": {
+                "nodes": [
+                    {
+                        "id": "data_node_1",
+                        "type": "data_node",
+                        "position": {"x": 100, "y": 100},
+                        "data": {
+                            "label": "数据节点",
+                            "config": {
+                                "data_source": "custom",
+                                "data": "training data"
+                            }
+                        },
+                    },
+                    {
+                        "id": "train_node_1",
+                        "type": "train_node",
+                        "position": {"x": 300, "y": 100},
+                        "data": {
+                            "label": "训练节点",
+                            "config": {
+                                "model_name": "resnet50",
+                                "epochs": 10,
+                                "batch_size": 32,
+                                "learning_rate": 0.001
+                            }
+                        },
+                    },
+                ],
+                "edges": [
+                    {
+                        "id": "edge_1",
+                        "source": "data_node_1",
+                        "target": "train_node_1",
+                    }
+                ],
+            },
+        }
+
+        # 创建工作流
+        response = client.post("/api/v1/workflows", json=workflow_data)
+        assert response.status_code == 201
+        workflow_id = response.json()["id"]
+
+        # 执行工作流
+        response = client.post(
+            f"/api/v1/workflows/{workflow_id}/run",
+            json={"inputs": {}},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["status"] == "completed"

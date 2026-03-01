@@ -2,9 +2,20 @@
 Pydantic 数据模型 - 请求和响应
 """
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TypeVar, Generic
 
 from pydantic import BaseModel, Field
+
+
+# === 通用响应模型 ===
+T = TypeVar('T')
+
+
+class ApiResponse(BaseModel, Generic[T]):
+    """通用 API 响应"""
+    code: int = 0
+    data: T
+    message: str = "success"
 
 
 # === 工作流相关模型 ===
@@ -139,10 +150,13 @@ class ExecutionResponse(BaseModel):
 class NodeExecutionItem(BaseModel):
     """节点执行项"""
     node_id: str
+    node_type: Optional[str] = None
     status: str
+    input: Optional[Dict[str, Any]] = None
+    output: Dict[str, Any] = Field(default_factory=dict)
+    error: Optional[str] = None
     started_at: Optional[datetime] = None
     finished_at: Optional[datetime] = None
-    output: Dict[str, Any] = Field(default_factory=dict)
 
 
 class ExecutionDetailResponse(BaseModel):
