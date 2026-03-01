@@ -54,3 +54,11 @@ web/dist-ssr/
 # Logs
 *.log
 logs/
+
+# Claude Code (uncomment to ignore)
+# .claude/
+
+# Test files
+test-*
+test-results/
+*.screenshot.png

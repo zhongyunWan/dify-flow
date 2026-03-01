@@ -81,7 +81,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
   edges: [],
   selectedNode: null,
   isConfigPanelOpen: false,
-  isDarkMode: true,
+  isDarkMode: false,
   isExecuting: false,
   executionStatus: null,
 

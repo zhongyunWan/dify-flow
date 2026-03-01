@@ -82,25 +82,25 @@ function WorkflowEditorInner() {
       deploy_node: '#ef4444',
       condition_node: '#06b6d4',
     };
-    return colors[node.data?.type] || '#999';
+    return colors[node.data?.type] || '#6366f1';
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden">
+    <div className="h-screen w-screen overflow-hidden bg-[var(--bg-deep)]">
       <Toolbar />
 
-      <div className="h-14" />
+      <div className="h-16" />
 
-      <div className="relative h-[calc(100vh-56px)]">
+      <div className="h-[calc(100vh-64px)] relative">
         <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div
           ref={reactFlowWrapper}
           className="h-full"
           style={{
-            marginLeft: isSidebarOpen ? '256px' : '0',
-            marginRight: isConfigPanelOpen ? '320px' : '0',
-            transition: 'margin 0.3s ease-in-out',
+            marginLeft: isSidebarOpen ? '260px' : '0',
+            marginRight: isConfigPanelOpen ? '340px' : '0',
+            transition: 'margin 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
           <ReactFlow
@@ -122,7 +122,7 @@ function WorkflowEditorInner() {
               animated: true,
             }}
             style={{
-              backgroundColor: isDarkMode ? '#1a1a2e' : '#f8fafc',
+              backgroundColor: isDarkMode ? '#0a0a0f' : '#f8fafc',
             }}
           >
             <Background
@@ -133,16 +133,19 @@ function WorkflowEditorInner() {
             />
             <Controls
               style={{
-                backgroundColor: isDarkMode ? '#1e293b' : 'white',
-                borderColor: isDarkMode ? '#334155' : '#e2e8f0',
-                color: isDarkMode ? 'white' : 'black',
+                backgroundColor: isDarkMode ? '#12121a' : 'white',
+                borderColor: isDarkMode ? '#2a2a38' : '#e2e8f0',
+                borderRadius: '12px',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
               }}
             />
             <MiniMap
               nodeColor={nodeColor}
-              maskColor={isDarkMode ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)'}
+              maskColor={isDarkMode ? 'rgba(10, 10, 15, 0.8)' : 'rgba(248, 250, 252, 0.8)'}
               style={{
-                backgroundColor: isDarkMode ? '#1e293b' : 'white',
+                backgroundColor: isDarkMode ? '#12121a' : 'white',
+                borderRadius: '12px',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
               }}
             />
           </ReactFlow>

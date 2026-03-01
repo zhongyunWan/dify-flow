@@ -92,7 +92,6 @@ export default function Toolbar() {
       setExecutionStatus('running');
       const execution = await executionApi.run(currentId);
 
-      // Simulate execution status polling
       const pollExecution = async () => {
         try {
           const result = await executionApi.get(execution.id);
@@ -123,52 +122,44 @@ export default function Toolbar() {
 
   const getStatusColor = () => {
     switch (useWorkflowStore.getState().executionStatus) {
-      case 'completed': return 'bg-green-500';
+      case 'completed': return 'bg-emerald-500';
       case 'failed': return 'bg-red-500';
       case 'running': return 'bg-blue-500 animate-pulse';
-      default: return 'bg-gray-500';
+      default: return 'bg-slate-500';
     }
   };
 
   return (
-    <div
-      className="fixed top-0 left-0 right-0 h-14 z-30 flex items-center justify-between px-4 border-b"
-      style={{
-        backgroundColor: 'var(--bg-primary)',
-        borderColor: 'var(--border-color)',
-      }}
-    >
+    <div className="fixed top-0 left-0 right-0 h-16 z-40 flex items-center justify-between px-6 glass">
       {/* Left: Logo & Name */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-            <span className="text-white font-bold text-sm">WF</span>
+      <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
           </div>
-          <span className="font-semibold text-lg" style={{ color: 'var(--text-primary)' }}>
-            Dify Flow
+          <span className="font-semibold text-lg tracking-tight text-slate-100">
+            Dify <span className="text-indigo-400">Flow</span>
           </span>
         </div>
 
-        <div className="h-6 w-px" style={{ backgroundColor: 'var(--border-color)' }} />
+        <div className="h-6 w-px bg-slate-700/50" />
 
         <input
           type="text"
           value={workflowName}
           onChange={(e) => setWorkflowName(e.target.value)}
-          className="px-3 py-1 rounded-md border text-sm focus:outline-none focus:ring-2"
-          style={{
-            backgroundColor: 'var(--bg-secondary)',
-            borderColor: 'var(--border-color)',
-            color: 'var(--text-primary)',
-          }}
+          placeholder="未命名工作流"
+          className="w-48 px-4 py-2 rounded-lg bg-slate-800/50 border border-slate-700/50 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all"
         />
       </div>
 
       {/* Center: Status */}
       {isExecuting && (
-        <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${getStatusColor()}`} />
-          <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+        <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 animate-fade-in">
+          <div className={`w-2 h-2 rounded-full ${getStatusColor()} shadow-lg shadow-current`} />
+          <span className="text-sm text-slate-400 font-medium">
             {useWorkflowStore.getState().executionStatus === 'running' ? '执行中...' :
              useWorkflowStore.getState().executionStatus === 'completed' ? '执行完成' :
              '等待执行'}
@@ -181,16 +172,16 @@ export default function Toolbar() {
         {/* Theme Toggle */}
         <button
           onClick={toggleDarkMode}
-          className="p-2 rounded-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="w-10 h-10 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all"
           title={isDarkMode ? '切换到浅色模式' : '切换到深色模式'}
         >
           {isDarkMode ? (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
           ) : (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
           )}
         </button>
@@ -198,40 +189,40 @@ export default function Toolbar() {
         {/* Import */}
         <button
           onClick={handleImport}
-          className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
-          style={{
-            backgroundColor: 'var(--bg-secondary)',
-            color: 'var(--text-primary)',
-            border: '1px solid var(--border-color)',
-          }}
+          className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all"
         >
-          导入
+          <span className="flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            导入
+          </span>
         </button>
 
         {/* Export */}
         <button
           onClick={handleExport}
-          className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
-          style={{
-            backgroundColor: 'var(--bg-secondary)',
-            color: 'var(--text-primary)',
-            border: '1px solid var(--border-color)',
-          }}
+          className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all"
         >
-          导出
+          <span className="flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            导出
+          </span>
         </button>
 
         {/* Save */}
         <button
           onClick={() => setShowSaveModal(true)}
-          className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
-          style={{
-            backgroundColor: 'var(--bg-primary)',
-            color: 'var(--text-primary)',
-            border: '1px solid var(--border-color)',
-          }}
+          className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all"
         >
-          保存
+          <span className="flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+            </svg>
+            保存
+          </span>
         </button>
 
         {/* Run */}
@@ -239,54 +230,59 @@ export default function Toolbar() {
           onClick={handleRun}
           disabled={isExecuting}
           className={`
-            px-4 py-1.5 rounded-lg text-sm font-medium transition-all
-            ${isExecuting ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}
+            px-5 py-2 rounded-xl text-sm font-semibold transition-all
+            ${isExecuting
+              ? 'opacity-50 cursor-not-allowed bg-emerald-600/50'
+              : 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-400 hover:to-emerald-500 hover:shadow-lg hover:shadow-emerald-500/25 hover:-translate-y-0.5'
+            }
           `}
-          style={{
-            backgroundColor: '#10b981',
-            color: 'white',
-          }}
         >
-          {isExecuting ? '执行中...' : '执行'}
+          <span className="flex items-center gap-2">
+            {isExecuting ? (
+              <>
+                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                执行中...
+              </>
+            ) : (
+              <>
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                执行
+              </>
+            )}
+          </span>
         </button>
       </div>
 
       {/* Save Modal */}
       {showSaveModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div
-            className="w-96 p-6 rounded-lg shadow-xl"
-            style={{ backgroundColor: 'var(--bg-primary)' }}
-          >
-            <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="w-[400px] p-6 rounded-2xl glass shadow-2xl animate-scale-in">
+            <h3 className="text-xl font-semibold mb-5 text-slate-100">
               保存工作流
             </h3>
             <input
               type="text"
               value={saveName}
               onChange={(e) => setSaveName(e.target.value)}
-              placeholder="工作流名称"
-              className="w-full px-3 py-2 rounded-md border mb-4 focus:outline-none focus:ring-2"
-              style={{
-                backgroundColor: 'var(--bg-secondary)',
-                borderColor: 'var(--border-color)',
-                color: 'var(--text-primary)',
-              }}
+              placeholder="请输入工作流名称"
+              className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/20 transition-all mb-5"
+              autoFocus
             />
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-end gap-3">
               <button
                 onClick={() => setShowSaveModal(false)}
-                className="px-4 py-2 rounded-md text-sm font-medium"
-                style={{
-                  backgroundColor: 'var(--bg-secondary)',
-                  color: 'var(--text-primary)',
-                }}
+                className="px-5 py-2.5 rounded-xl text-sm font-medium text-slate-300 bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all"
               >
                 取消
               </button>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 rounded-md text-sm font-medium bg-blue-500 text-white hover:bg-blue-600"
+                className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-400 hover:to-purple-400 hover:shadow-lg hover:shadow-indigo-500/25 transition-all"
               >
                 保存
               </button>
