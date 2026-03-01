@@ -160,13 +160,17 @@ export default function ConfigPanel({ isOpen, onClose }: ConfigPanelProps) {
   return (
     <div
       className={`
-        fixed right-0 top-0 h-full w-[320px] z-20
-        transition-transform duration-200 ease-out
+        fixed right-0 z-20
+        transition-transform duration-200 ease-out rounded-l-xl
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
       `}
       style={{
+        top: '48px',
+        height: 'calc(100vh - 48px)',
+        width: '280px',
         background: 'var(--bg-primary)',
         borderLeft: '1px solid var(--border-default)',
+        boxShadow: 'var(--shadow-lg)',
       }}
     >
       {/* Header */}
@@ -205,7 +209,7 @@ export default function ConfigPanel({ isOpen, onClose }: ConfigPanelProps) {
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-64px)]">
+      <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-56px)]">
         {/* Node Name */}
         <div>
           <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>

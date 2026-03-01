@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import {
   ReactFlow,
   Background,
@@ -34,6 +34,31 @@ function WorkflowEditorInner() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl/Cmd + B: Toggle sidebar
+      if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+        e.preventDefault();
+        setIsSidebarOpen(prev => !prev);
+      }
+      // Ctrl/Cmd + J: Toggle config panel
+      if ((e.ctrlKey || e.metaKey) && e.key === 'j') {
+        e.preventDefault();
+        setIsConfigPanelOpen(prev => !prev);
+      }
+      // F11: Toggle fullscreen
+      if (e.key === 'F11') {
+        e.preventDefault();
+        setIsFullscreen(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const onDragOver = useCallback((event: React.DragEvent) => {
     event.preventDefault();
@@ -86,22 +111,21 @@ function WorkflowEditorInner() {
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[var(--bg-deep)]">
-      <Toolbar />
+    <div className={`h-screen w-screen overflow-hidden bg-[var(--bg-deep)] ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
+      {!isFullscreen && <Toolbar />}
 
-      <div className="h-16" />
+      <div className={`${isFullscreen ? 'h-full' : 'h-12'}`} />
 
-      <div className="h-[calc(100vh-64px)] relative">
-        <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
+      <div className={`${isFullscreen ? 'h-full' : 'h-[calc(100vh-48px)]'} relative`}>
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+          isFullscreen={isFullscreen}
+        />
 
         <div
           ref={reactFlowWrapper}
           className="h-full"
-          style={{
-            marginLeft: isSidebarOpen ? '260px' : '0',
-            marginRight: isConfigPanelOpen ? '340px' : '0',
-            transition: 'margin 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
         >
           <ReactFlow
             nodes={nodes}
